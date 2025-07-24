@@ -6,8 +6,22 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
+// Middleware to parse JSON bodies
+app.use(express.json());
+
 // Serve static files from the current directory
 app.use(express.static(path.join(__dirname)));
+
+// Endpoint to receive email ID from the add-in
+app.post('/log-email-id', (req, res) => {
+    const { emailId, status } = req.body;
+    if (emailId) {
+        console.log('📧 Email ID read:', emailId);
+    } else {
+        console.log('📧 No email ID available:', status || 'Unknown reason');
+    }
+    res.json({ success: true });
+});
 
 // Specific route for taskpane.html (serves from addin folder)
 app.get('/taskpane.html', (req, res) => {
