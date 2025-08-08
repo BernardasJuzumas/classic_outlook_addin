@@ -1,6 +1,14 @@
 # Outlook Add-in: Email ID Viewer
 
-A classic Outlook add-in that displays the email ID of the selected email in an on-premises Exchange Server.
+A modern Outlook add-in that displays the email ID of the selected email in an on-premises Exchange Server. The add-in appears as a button in the Outlook ribbon and opens in its own task pane for easy access.
+
+## Features
+
+- **Ribbon Integration**: Appears as "Email ID Viewer" button in the Outlook ribbon
+- **Dedicated Task Pane**: Opens in its own separate pane, independent of email reading pane
+- **Auto-Available**: Always accessible when reading emails, no need to activate manually
+- **Server-Side Logging**: Email IDs are logged to the Node.js server console for debugging
+- **Real-Time Updates**: Automatically updates when switching between emails
 
 ## Local Development Setup
 
@@ -85,10 +93,11 @@ openssl req -x509 -newkey rsa:2048 -keyout localhost-key.pem -out localhost.pem 
 
 3. **Use the add-in in Classic Outlook:**
    - Open an email in Outlook (reading pane or separate window)
-   - The add-in should appear automatically in the reading pane or email window
-   - If not visible, check the ribbon for an "Add-ins" tab or look for "Email ID Viewer"
-   - The add-in will display in a task pane showing the email's unique ID
-   - For classic Outlook, the add-in loads based on the rules defined in the manifest (when reading messages)
+   - Look for the **"Email ID Viewer"** button in the ribbon under the "Email Tools" group
+   - Click the button to open the add-in in its own task pane
+   - The task pane will display the email's unique ID and remains open independently
+   - Switch between emails to see the ID update automatically in the task pane
+   - Check the Node.js server console to see email IDs being logged in real-time
 
 ### Development Notes
 

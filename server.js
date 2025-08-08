@@ -14,11 +14,13 @@ app.use(express.static(path.join(__dirname)));
 
 // Endpoint to receive email ID from the add-in
 app.post('/log-email-id', (req, res) => {
-    const { emailId, status } = req.body;
+    const { emailId, status, timestamp } = req.body;
+    const time = timestamp ? new Date(timestamp).toLocaleTimeString() : new Date().toLocaleTimeString();
+    
     if (emailId) {
-        console.log('📧 Email ID read:', emailId);
+        console.log(`📧 [${time}] Email ID read:`, emailId);
     } else {
-        console.log('📧 No email ID available:', status || 'Unknown reason');
+        console.log(`📧 [${time}] No email ID available:`, status || 'Unknown reason');
     }
     res.json({ success: true });
 });
@@ -35,6 +37,11 @@ app.get('/taskpane.css', (req, res) => {
 
 app.get('/taskpane.js', (req, res) => {
     res.sendFile(path.join(__dirname, 'addin', 'taskpane.js'));
+});
+
+// Serve assets (icons, etc.)
+app.get('/assets/:filename', (req, res) => {
+    res.sendFile(path.join(__dirname, 'assets', req.params.filename));
 });
 
 // Serve manifest.xml
